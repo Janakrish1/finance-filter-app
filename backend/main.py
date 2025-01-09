@@ -1,8 +1,6 @@
-from flask import Flask, send_from_directory
+from flask import Flask, send_from_directory, request, jsonify
 from flask_cors import CORS
 from get_financial_data import get_financial_data
-from flask_json import jsonify
-from flask import request
 
 
 app = Flask(__name__, static_folder="../frontend/build", static_url_path="/") 

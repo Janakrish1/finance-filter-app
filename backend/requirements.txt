@@ -1,5 +1,4 @@
-Flask==2.3.3
+Flask==2.3.2
 Flask-Cors==3.0.10
-Flask-Json==0.3.4
 python-dotenv==1.0.0
 requests==2.31.0

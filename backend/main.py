@@ -1,6 +1,7 @@
 from flask import Flask, send_from_directory, request, jsonify
 from flask_cors import CORS
 from get_financial_data import get_financial_data
+import os
 
 
 app = Flask(__name__, static_folder="../frontend/build", static_url_path="/") 
@@ -58,7 +59,6 @@ def filter_financial_data():
     return jsonify(filtered_data)
 
 
-
-
 if __name__ == "__main__":
-    app.run(debug=True) 
+    port = int(os.environ.get("PORT", 5000))  # Use the PORT env variable or default to 5000
+    app.run(host="0.0.0.0", port=port, debug=True)

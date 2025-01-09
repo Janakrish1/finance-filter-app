@@ -9,11 +9,22 @@ function App() {
 
   useEffect(() => {
     const fetchData = async () => {
+      const timeout = 5000; 
+      const controller = new AbortController();
+      const signal = controller.signal;
+
+      const timeoutPromise = new Promise((_, reject) =>
+        setTimeout(() => reject(new Error("Request timed out")), timeout)
+      );
+
       try {
-        const response = await fetch("http://127.0.0.1:5000/api/financial-data");
+        const fetchPromise = fetch("http://127.0.0.1:5000/api/financial-data", { signal });
+        const response = await Promise.race([fetchPromise, timeoutPromise]);
+
         if (!response.ok) {
           throw new Error("Failed to fetch financial data");
         }
+
         const data = await response.json();
         setFinancialData(data);
         setOriginalData(data);
@@ -28,7 +39,6 @@ function App() {
   }, []);
 
   const sortData = (key) => {
-
     if (sortConfig.key === key && sortConfig.direction === "desc") {
       setSortConfig({ key: null, direction: null });
       setFinancialData(originalData);

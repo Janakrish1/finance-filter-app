@@ -2,6 +2,7 @@ from flask import Flask, send_from_directory
 from flask_cors import CORS
 from get_financial_data import get_financial_data
 from flask_json import jsonify
+from flask import request
 
 
 app = Flask(__name__, static_folder="../frontend/build", static_url_path="/") 
@@ -19,6 +20,47 @@ def financial_data():
         return jsonify(data)
     else:
         return jsonify({"error": "Failed to fetch data"}), 500
+      
+@app.route("/api/filter-financial-data", methods=["GET"])
+def filter_financial_data():
+    data = get_financial_data()
+    if not data:
+        return jsonify({"error": "Failed to fetch data"}), 500
+
+    from_year = request.args.get("fromYear", type=int)
+    to_year = request.args.get("toYear", type=int)
+    min_revenue = request.args.get("minRevenue", type=float)
+    max_revenue = request.args.get("maxRevenue", type=float)
+    min_net_income = request.args.get("minNetIncome", type=float)
+    max_net_income = request.args.get("maxNetIncome", type=float)
+
+    print(data)
+
+    filtered_data = []
+    for item in data:
+        date_year = int(item["date"].split("-")[0])
+
+        if from_year and date_year < from_year:
+            continue
+        if to_year and date_year > to_year:
+            continue
+
+        if min_revenue and item["revenue"] < min_revenue:
+            continue
+        if max_revenue and item["revenue"] > max_revenue:
+            continue
+
+        if min_net_income and item["netIncome"] < min_net_income:
+            continue
+        if max_net_income and item["netIncome"] > max_net_income:
+            continue
+
+        filtered_data.append(item)
+
+    return jsonify(filtered_data)
+
+
+
 
 if __name__ == "__main__":
     app.run(debug=True) 

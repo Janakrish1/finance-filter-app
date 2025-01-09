@@ -18,4 +18,4 @@ def get_data():
     return {"message": "Hello from Flask!"}
 
 if __name__ == "__main__":
-    app.run(debug=True)  # Make sure to run in development mode for now
+    app.run()  # Make sure to run in development mode for now

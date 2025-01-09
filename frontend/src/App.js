@@ -12,11 +12,12 @@ function App() {
   const [minNetIncome, setMinNetIncome] = useState("");
   const [maxNetIncome, setMaxNetIncome] = useState("");
 
+  const BASE_URL = "https://finance-filter-app.onrender.com/"
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch("http://127.0.0.1:5000/api/financial-data");
+        const response = await fetch(`${BASE_URL}/api/financial-data`);
         if (!response.ok) throw new Error("Failed to fetch financial data");
         const data = await response.json();
         setFinancialData(data);
@@ -41,7 +42,7 @@ function App() {
         maxNetIncome,
       }).toString();
 
-      const response = await fetch(`http://127.0.0.1:5000/api/filter-financial-data?${query}`);
+      const response = await fetch(`${BASE_URL}/api/filter-financial-data?${query}`);
       if (!response.ok) throw new Error("Failed to fetch filtered financial data");
       const data = await response.json();
       setFinancialData(data);
@@ -62,7 +63,7 @@ function App() {
 
     setLoading(true);
     try {
-      const response = await fetch("http://127.0.0.1:5000/api/financial-data");
+      const response = await fetch(`${BASE_URL}/api/financial-data`);
       if (!response.ok) throw new Error("Failed to fetch financial data");
       const data = await response.json();
       setFinancialData(data);

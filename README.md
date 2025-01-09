@@ -1,10 +1,14 @@
-# **Finance Filter App**
+# **Financial Data Filter App**
 
 This is a full-stack financial data filtering app that displays annual income statements for Apple Inc. Users can sort the data by various financial metrics and reset it to the default order. The backend is built with **Flask (Python)**, and the frontend is built with **React (JavaScript)** and styled using **Tailwind CSS**.
 
 ---
 
 ## **Instructions to Run the Project Locally**
+
+### **Source Code**
+
+[Financial Data Filter App](https://github.com/Janakrish1/finance-filter-app.git)
 
 ### **Prerequisites**
 
@@ -77,7 +81,7 @@ The backend will be running at `http://127.0.0.1:5000`.
 4. Start the React development server:
 
    ```bash
-   npm start
+   npm run start
    ```
 
 The frontend will be running at `http://localhost:3000`.

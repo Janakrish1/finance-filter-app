@@ -1,7 +1,10 @@
 from flask import Flask, send_from_directory
+from flask_cors import CORS
+
 
 app = Flask(__name__, static_folder="../frontend/build", static_url_path="/")
-app.config["DEBUG"] = False  # Disable debug mode
+# app.config["DEBUG"] = False 
+CORS(app)
 
 
 # Serve the React frontend

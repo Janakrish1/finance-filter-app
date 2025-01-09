@@ -92,4 +92,3 @@ The frontend will be running at `http://localhost:3000`.
 
 - **Live App**: [https://finance-filter-app.vercel.app](https://finance-filter-app.vercel.app)
 - **Backend Server** (hosted on Render in my login): [https://finance-filter-app.onrender.com](https://finance-filter-app.onrender.com)
-
